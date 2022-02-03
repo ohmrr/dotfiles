@@ -86,9 +86,12 @@ source $ZSH/oh-my-zsh.sh
 
 # Aliases
 alias home="cd $HOME"
-alias reload="source $HOME/.zshrc"
+alias reload="source $HOME/.dotfiles/zsh/.zshrc"
 alias zconfig="code $HOME/.dotfiles/zsh/.zshrc"
 alias open="ofd"
+
+alias ..="cd .."
+alias ....="cd ../.."
 
 export NVM_DIR="$HOME/.nvm"
 
