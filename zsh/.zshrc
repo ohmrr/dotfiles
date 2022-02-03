@@ -21,12 +21,16 @@ export NVM_DIR="$HOME/.nvm"
 
 # Aliases
 alias home="cd $HOME"
-alias projects="cd $HOME/Code"
+alias p="cd $HOME/Code"
+alias dl="cd $HOME/Downloads"
+alias dt="cd $HOME/Desktop"
+
 alias reload="source ~/.zshrc"
 alias open="ofd"
 
 alias ..="cd .."
-alias ....="cd ../.."
+alias ...="cd ../.."
+alias ...."cd ../../.."
 
 # Load NVM
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"
