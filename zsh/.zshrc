@@ -17,6 +17,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Exports
 export DOT_FILES="$HOME/.dotfiles"
+export NVM_DIR="$HOME/.nvm"
 
 # Aliases
 alias home="cd $HOME"
@@ -26,3 +27,6 @@ alias open="ofd"
 
 alias ..="cd .."
 alias ....="cd ../.."
+
+# Load NVM
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"
