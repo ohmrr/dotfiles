@@ -1,0 +1,9 @@
+[user]
+	name = Ohmrrr
+	email = 89240639+Ohmrrr@users.noreply.github.com
+	
+[init]
+	defaultBranch = main
+
+[core]
+	editor = code --wait
