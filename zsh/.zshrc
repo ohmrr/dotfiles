@@ -27,7 +27,7 @@ alias dl="cd $HOME/Downloads"
 alias dt="cd $HOME/Desktop"
 
 alias reload="source ~/.zshrc"
-alias open="ofd"
+alias finder="ofd"
 
 alias ..="cd .."
 alias ...="cd ../.."
