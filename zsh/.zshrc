@@ -1,4 +1,5 @@
 export ZSH="/Users/ohmrrr/.oh-my-zsh"
+export DOT_FILES="$HOME/.dotfiles"
 
 # Theme
 # https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
@@ -14,9 +15,9 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
+source $DOT_FILES/xcode/aliases.zsh
 
 # Exports
-export DOT_FILES="$HOME/.dotfiles"
 export NVM_DIR="$HOME/.nvm"
 
 # Aliases
