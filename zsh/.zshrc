@@ -1,6 +1,9 @@
 export ZSH="/Users/ohmrrr/.oh-my-zsh"
 export DOT_FILES="$HOME/.dotfiles"
 
+# History
+HISTFILE="$DOT_FILES/zsh/.zsh_history"
+
 # Theme
 # https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="cloud"
@@ -19,6 +22,7 @@ source $DOT_FILES/xcode/aliases.zsh
 
 # Exports
 export NVM_DIR="$HOME/.nvm"
+export EDITOR="code"
 
 # Aliases
 alias home="cd $HOME"
