@@ -6,8 +6,8 @@ would normally. It's also a good idea to upload them to GitHub in case you ever
 need to change your system. 
 
 Using symlinks, you can keep all the files in a seperate directory and link them
-to the `$HOME` directory, for all the important files that need to be in there.
-For example:
+to the `$HOME` directory. This is great for all the important files that need to
+be there. For example:
 
 `ln -s ~/.dotfiles/.zshrc ~/.zshrc`
 
