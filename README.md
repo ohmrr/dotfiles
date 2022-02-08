@@ -10,4 +10,6 @@ Other files don't need to be in your home directory at all, like `.zsh_history`.
 
 ## Note
 
-There is no script to automate organizing your `$HOME` in this repo. It is here to be used as a reference to others who want to do what I did here.
+- There is no script to automate organizing your `$HOME` in this repo. It is here to be used as a reference to others who want to do what I did here.
+- Some configurations may or may not be exclusive to MacOS, such as
+the macos plugin in oh-my-zsh or the iOS simulator.
