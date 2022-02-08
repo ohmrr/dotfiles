@@ -1,4 +1,4 @@
-export ZSH="/Users/ohmrrr/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 export DOT_FILES="$HOME/.dotfiles"
 
 # History
