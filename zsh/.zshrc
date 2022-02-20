@@ -2,7 +2,7 @@ export DOT_FILES="$HOME/.dotfiles"
 export ZSH="$DOT_FILES/.oh-my-zsh"
 
 # History
-HISTFILE="$DOT_FILES/zsh/.zsh_history"
+HISTFILE="$DOT_FILES/zsh/etc/.zsh_history"
 
 # Theme
 # https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
@@ -17,8 +17,10 @@ plugins=(
     copydir
 )
 
+# Will change to use a loop for all files that end in .zsh
 source $ZSH/oh-my-zsh.sh
 source $DOT_FILES/xcode/aliases.zsh
+source $DOT_FILES/yarn/path.zsh
 
 # Exports
 export NVM_DIR="$HOME/.nvm"

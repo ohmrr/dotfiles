@@ -1,6 +1,7 @@
 # ZSH
 .oh-my-zsh/
-zsh/.zsh_history
+zsh/etc
 
 # Yarn
+yarn/bin
 yarn/.yarnrc
