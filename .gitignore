@@ -1,2 +1,6 @@
-# Hist File
+# ZSH
+.oh-my-zsh/
 zsh/.zsh_history
+
+# Yarn
+yarn/.yarnrc
