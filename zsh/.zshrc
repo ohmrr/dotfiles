@@ -1,5 +1,5 @@
+export ZSH="$HOME/.oh-my-zsh"
 export DOT_FILES="$HOME/.dotfiles"
-export ZSH="$DOT_FILES/.oh-my-zsh"
 
 # History
 HISTFILE="$DOT_FILES/zsh/etc/.zsh_history"
@@ -17,27 +17,24 @@ plugins=(
     copydir
 )
 
-# Will change to use a loop for all files that end in .zsh
+# Load .zsh Files
 source $ZSH/oh-my-zsh.sh
-source $DOT_FILES/xcode/aliases.zsh
-source $DOT_FILES/yarn/path.zsh
+
+typeset -U zsh_files
+zsh_files=($DOT_FILES/**/*.zsh)
+
+for file in $zsh_files
+do
+    source $file
+done
+
+unset zsh_files
+
+typeset -U PATH
 
 # Exports
 export NVM_DIR="$HOME/.nvm"
 export EDITOR="code"
-
-# Aliases
-alias p="cd $HOME/Code"
-alias dl="cd $HOME/Downloads"
-alias dt="cd $HOME/Desktop"
-
-alias reload="source ~/.zshrc"
-alias path='echo $PATH | tr -s ":" "\n"'
-alias finder="ofd"
-
-alias ..="cd .."
-alias ...="cd ../.."
-alias ...."cd ../../.."
 
 # Load NVM
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"
