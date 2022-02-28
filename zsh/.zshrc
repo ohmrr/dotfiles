@@ -14,7 +14,7 @@ plugins=(
     macos
     zsh-autosuggestions
     zsh-syntax-highlighting
-    copydir
+    copypath
 )
 
 # Load .zsh Files
