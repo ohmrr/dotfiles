@@ -51,10 +51,10 @@ load-nvmrc() {
         if [ "$nvmrc_node_version" = "N/A" ]; then
             echo ".nvmrc file exists, but node version ${nvmrc_node_version} is not installed."
         elif [ "$nvmrc_node_version" != "$node_version" ]; then
-            nvm use
+            nvm use --silent
         fi
     elif [ "$node_version" != "$(nvm version default)" ]; then
-        nvm use default
+        nvm use --silent default
     fi
 }
 
