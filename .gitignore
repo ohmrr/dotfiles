@@ -1,7 +1,0 @@
-# ZSH
-.oh-my-zsh/
-zsh/etc
-
-# Yarn
-yarn/bin
-yarn/.yarnrc

@@ -1,1 +1,0 @@
-alias yt-song="$DOT_FILES/yt-dlp/yt-song.sh"
