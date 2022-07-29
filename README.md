@@ -1,15 +1,8 @@
 # .dotfiles
 
-Having a cluttered, and unorganized `$HOME` always bothered me. So I made this in order to organize some files and still have the same functionality that I would normally. It's also a good idea to upload them to GitHub in case you ever need to change your system.
+Having a cluttered, and unorganized `$HOME` always bothered me, so I made this repo in order to organize it. I used symlinks in order to keep my files in a separate directory and link them to my `$HOME` so that I keep the same functionality.
 
-Using symlinks, you can keep all the files in a seperate directory and link them to the `$HOME` directory. This is great for all the important files that need to be there. For example:
-
-`ln -s ~/.dotfiles/.zshrc ~/.zshrc`
-
-Other files don't need to be in your home directory at all, like `.zsh_history`. Keeping these less important files in a seperate directory can help out with all the clutter.
+Less important files like `.zsh_history` don't even need to be in your home directory, so you can just keep them in a .dotfiles folder without linking them.
 
 ## Note
-
-- There is no script to automate organizing your `$HOME` in this repo. It is here to be used as a reference to others who want to do what I did here.
-- Some configurations may or may not be exclusive to MacOS, such as
-the macos plugin in oh-my-zsh or the iOS simulator.
+- Some configurations might be exclusive to MacOS, such as the macos plugin from oh-my-zsh or the iOS simulator.
