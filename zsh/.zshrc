@@ -4,6 +4,9 @@ export DOT_FILES="$HOME/.dotfiles"
 # History
 HISTFILE="$DOT_FILES/zsh/etc/.zsh_history"
 
+# Window Title
+DISABLE_AUTO_TITLE="true"
+
 # Theme
 # https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="cloud"
@@ -13,6 +16,7 @@ plugins=(
     git 
     macos
     zsh-autosuggestions
+    web-search
     zsh-syntax-highlighting
     copypath
 )
