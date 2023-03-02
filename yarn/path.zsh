@@ -1,1 +1,0 @@
-export PATH="$DOT_FILES/yarn/bin:$PATH"
