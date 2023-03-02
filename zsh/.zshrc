@@ -1,66 +1,49 @@
-export ZSH="$HOME/.oh-my-zsh"
-export DOT_FILES="$HOME/.dotfiles"
+setopt autocd ksharrays magicequalsubst nonomatch
+setopt notify numericglobsort promptsubst interactivecomments
+setopt hist_expire_dups_first hist_ignore_dups
+setopt hist_ignore_space hist_verify
 
 # History
-HISTFILE="$DOT_FILES/zsh/etc/.zsh_history"
+HISTFILE="$ZDOTDIR/cache/.zsh_history"
+HISTSIZE=10000
+SAVEHIST=10000
 
-# Window Title
 DISABLE_AUTO_TITLE="true"
 
-# Theme
-# https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="cloud"
+autoload -Uz compinit
+compinit -d ~/.cache/zcompdump
+zstyle ':completion:*:*:*:*:*' menu select
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
-# ZSH Plugins
-plugins=(
-    git 
-    macos
-    zsh-autosuggestions
-    web-search
-    zsh-syntax-highlighting
-    copypath
-)
+PROMPT=$'%F{%(#.blue.green)}┌──${debian_chroot:+($debian_chroot)──}(%B%F{%(#.red.blue)}%n%(#.💀.@)%m%b%F{%(#.blue.green)})-[%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b%F{%(#.blue.green)}]\n└─%B%(#.%F{red}#.%F{blue}$)%b%F{reset} '
+RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.)'
+
+unsetopt ksharrays
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 
 # Load .zsh Files
-source $ZSH/oh-my-zsh.sh
-
 typeset -U zsh_files
-zsh_files=($DOT_FILES/**/*.zsh)
+zsh_files=($DOTDIR/**/*.zsh)
 
-for file in $zsh_files
-do
-    source $file
+for file in $zsh_files; do
+    source "$file"
 done
-
 unset zsh_files
 
 typeset -U PATH
 
-# Exports
-export NVM_DIR="$HOME/.nvm"
-export EDITOR="code"
+source $HOMEBREW_PREFIX/opt/chruby/share/chruby/chruby.sh
+source $HOMEBREW_PREFIX/opt/chruby/share/chruby/auto.sh
+chruby ruby-3.1.2
 
 # Load NVM
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"
 
 autoload -U add-zsh-hook
 
-load-nvmrc() {
-    local node_version="$(nvm version)"
-    local nvmrc_path="$(nvm_find_nvmrc)"
-
-    if [ -n "$nvmrc_path" ]; then
-        local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
-
-        if [ "$nvmrc_node_version" = "N/A" ]; then
-            echo ".nvmrc file exists, but node version ${nvmrc_node_version} is not installed."
-        elif [ "$nvmrc_node_version" != "$node_version" ]; then
-            nvm use --silent
-        fi
-    elif [ "$node_version" != "$(nvm version default)" ]; then
-        nvm use --silent default
-    fi
-}
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 add-zsh-hook chpwd load-nvmrc
 load-nvmrc

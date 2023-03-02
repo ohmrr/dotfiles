@@ -1,8 +1,0 @@
-# Global Ignores
-
-.DS_Store
-npm-debug.log
-Thumbs.db
-log/
-*.log
-*~
