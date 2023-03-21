@@ -22,6 +22,7 @@ unsetopt ksharrays
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zle_highlight=('paste:none')
 
 # Load .zsh Files
 typeset -U zsh_files
@@ -47,3 +48,8 @@ source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 add-zsh-hook chpwd load-nvmrc
 load-nvmrc
+
+count=$(ps a | awk '{print $2}' | grep -vi "tty*" | uniq | wc -l)
+if [ $count -eq "1" ]; then
+    neofetch
+fi
