@@ -11,7 +11,7 @@ SAVEHIST=10000
 DISABLE_AUTO_TITLE="true"
 
 autoload -Uz compinit
-compinit -d ~/.cache/zcompdump
+compinit -d $ZDOTDIR/cache/.zcompdump-$HOST
 zstyle ':completion:*:*:*:*:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
