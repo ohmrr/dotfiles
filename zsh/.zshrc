@@ -39,15 +39,7 @@ source $HOMEBREW_PREFIX/opt/chruby/share/chruby/chruby.sh
 source $HOMEBREW_PREFIX/opt/chruby/share/chruby/auto.sh
 chruby ruby-3.1.2
 
-# Load NVM
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"
-
-autoload -U add-zsh-hook
-
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-
-add-zsh-hook chpwd load-nvmrc
-load-nvmrc
 
 count=$(ps a | awk '{print $2}' | grep -vi "tty*" | uniq | wc -l)
 if [ $count -eq "1" ]; then
