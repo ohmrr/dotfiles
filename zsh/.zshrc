@@ -1,7 +1,6 @@
 setopt autocd ksharrays magicequalsubst nonomatch
 setopt notify numericglobsort promptsubst interactivecomments
-setopt hist_expire_dups_first hist_ignore_dups append_history
-setopt hist_ignore_space hist_verify
+setopt hist_expire_dups_first append_history hist_ignore_space hist_verify
 
 # History
 HISTFILE="$ZDOTDIR/cache/.zsh_history"
