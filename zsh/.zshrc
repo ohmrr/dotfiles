@@ -44,10 +44,11 @@ count=$(ps a | awk '{print $2}' | grep -vi "tty*" | uniq | wc -l)
 if [ $count -eq "1" ]; then
     neofetch
 fi
-# pnpm
+
 export PNPM_HOME="/Users/ohmrrr/Library/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
-# pnpm end
+
+export PATH="$PATH:/Users/ohmrrr/Library/flutter/bin"
