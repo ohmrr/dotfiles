@@ -1,8 +1,8 @@
 [user]
-    name = Omar Sadat
-    email = 89240639+ohmrr@users.noreply.github.com
+    name = {{ .git.name | quote }}
+    email = {{ .git.email | quote }}
+    signingKey = {{ .git.signingKey | quote }}
     useConfigOnly = true
-    signingKey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINz0Twq6EzcXDhQEQfE2IfiXEJ8ftOLAoibx6XN9dNDZ
 
 [init]
     defaultBranch = main

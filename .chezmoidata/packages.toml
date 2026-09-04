@@ -1,0 +1,10 @@
+[packages]
+common = [
+    "mise",
+    "starship",
+    "zoxide"
+]
+
+darwin = []
+
+arch = []

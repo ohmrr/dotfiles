@@ -1,0 +1,11 @@
+#!/bin/sh
+set -eu
+
+{{ if eq .chezmoi.os "darwin" -}}
+brew install{{ range .packages.common }} {{ . }}{{ end }}{{ range .packages.darwin }} {{ . }}{{ end }}
+
+{{ else if eq .chezmoi.os "linux" -}}
+{{ if or (eq .chezmoi.osRelease.id "arch") (eq .chezmoi.osRelease.id "cachyos") -}}
+sudo pacman -S --needed{{ range .packages.common }} {{ . }}{{ end }}{{ range .packages.arch }} {{ . }}{{ end }}
+{{ end -}}
+{{ end -}}
