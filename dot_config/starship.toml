@@ -1,5 +1,33 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
+format = '''
+[┌──](dimmed)[\(](bold dimmed)$username[󰣇](bold)$hostname[\)](bold dimmed)[─](dimmed)[\[](bold dimmed)$directory[\]](bold dimmed)
+[└─](dimmed)$character
+'''
+
+right_format = '''$all'''
+
+[username]
+style_user = 'bold cyan'
+style_root = 'bold red'
+format = '[$user]($style)'
+disabled = false
+show_always = true
+
+[hostname]
+format = '[$ssh_symbol](bold purple)[$hostname](bold cyan)'
+ssh_only = false
+disabled = false
+
+[directory]
+truncate_to_repo = true
+style = 'bold white'
+format = '[$path]($style)[$read_only]($read_only_style)'
+
+[character]
+success_symbol = '[λ](bold cyan)'
+error_symbol = '[✗](bold red)'
+
 [aws]
 format = '\[[$symbol($profile)(\($region\))(\[$duration\])]($style)\]'
 
@@ -119,9 +147,6 @@ format = '\[[$symbol($version)]($style)\]'
 
 [hg_branch]
 format = '\[[$symbol$branch]($style)\]'
-
-[hostname]
-format = '\[[$ssh_symbol($hostname)]($style)\] '
 
 [java]
 format = '\[[$symbol($version)]($style)\]'
@@ -263,9 +288,6 @@ format = '\[[$time]($style)\]'
 
 [typst]
 format = '\[[$symbol($version)]($style)\]'
-
-[username]
-format = '\[[$user]($style)\]'
 
 [vagrant]
 format = '\[[$symbol($version)]($style)\]'
