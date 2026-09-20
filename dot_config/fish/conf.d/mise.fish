@@ -1,5 +1,5 @@
-if status is-interactive
-    if type -q mise
-        mise activate fish | source
-    end
+fish_add_path --path "$HOME/.local/bin"
+
+if status is-interactive; and type -q mise
+    mise activate fish | source
 end
