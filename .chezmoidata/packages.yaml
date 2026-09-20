@@ -1,0 +1,47 @@
+packages:
+  common:
+    - bat
+    - curl
+    - eza
+    - fastfetch
+    - fish
+    - neovim
+    - ripgrep
+    - starship
+    - zoxide
+
+  profiles:
+   macos:
+     brew:
+       formulae:
+         - fd
+       cask:
+         - alttab
+         - bitwarden
+         - bruno
+         - font-jetbrains-mono-nerd-font
+         - ghostty
+         - raycast
+         - zed
+         - zen
+
+   cachyos:
+     pacman:
+       - bitwarden
+       - easyeffects
+       - fd
+       - ghostty
+       - ttf-jetbrains-mono-nerd
+       - zed
+       - zen-browser-bin
+     aur:
+       - bruno-bin
+       - vicinae-bin
+
+   ubuntu-wsl:
+     apt:
+       - fd-find
+
+   ubuntu-server:
+     apt:
+       - fd-find

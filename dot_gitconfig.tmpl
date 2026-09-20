@@ -1,10 +1,25 @@
 [user]
     name = {{ .git.name | quote }}
     email = {{ .git.email | quote }}
-    signingKey = {{ .git.signingKey | quote }}
     useConfigOnly = true
+{{- if ne .git.signingKey "" }}
+    signingKey = {{ .git.signingKey | quote }}
+{{- end }}
 
 [init]
     defaultBranch = main
 
+[push]
+    autoSetupRemote = true
+
+[fetch]
+    prune = true
+
+{{- if ne .git.signingKey "" }}
+
 [gpg]
+    format = ssh
+
+[commit]
+    gpgSign = true
+{{- end }}

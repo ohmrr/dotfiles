@@ -13,9 +13,13 @@
 [data]
 profile = {{ $profile | quote }}
 gui = {{ or
-            (eq $profile "macos")
-            (eq $profile "cachyos")
-      }}
+    (eq $profile "macos")
+    (eq $profile "cachyos")
+}}
+bitwardenSSHAgent = {{ or
+    (eq $profile "macos")
+    (eq $profile "cachyos")
+}}
 
 [data.git]
 name = {{ $name | quote }}

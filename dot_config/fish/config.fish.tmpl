@@ -1,0 +1,20 @@
+set fish_greeting
+
+if status is-interactive
+    if type -q fastfetch
+        fastfetch
+    end
+end
+
+{{- if .bitwardenSSHAgent }}
+
+set -l bitwarden_ssh_socket "$HOME/.bitwarden-ssh-agent.sock"
+
+if test -S "$bitwarden_ssh_socket"
+    if not set -q SSH_AUTH_SOCK
+        set -gx SSH_AUTH_SOCK "$bitwarden_ssh_socket"
+    else if not test -S "$SSH_AUTH_SOCK"
+        set -gx SSH_AUTH_SOCK "$bitwarden_ssh_socket"
+    end
+end
+{{- end }}
