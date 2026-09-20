@@ -14,6 +14,17 @@ format = '[$user]($style)'
 disabled = false
 show_always = true
 
+[os]
+format = '[$symbol]($style)'
+style = 'bold'
+disabled = false
+
+[os.symbols]
+CachyOS = '󰣇'
+Arch = '󰣇'
+Macos = ''
+Ubuntu = ''
+
 [hostname]
 format = '[$ssh_symbol](bold purple)[$hostname](bold cyan)'
 ssh_only = false
@@ -210,9 +221,6 @@ format = '\[[$symbol($version)]($style)\]'
 
 [openstack]
 format = '\[[$symbol$cloud(\($project\))]($style)\]'
-
-[os]
-format = '\[[$symbol]($style)\]'
 
 [package]
 format = '\[[$symbol$version]($style)\]'

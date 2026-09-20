@@ -16,12 +16,16 @@ packages:
        formulae:
          - fd
        cask:
-         - alttab
+         - alcove
+         - alt-tab
          - bitwarden
          - bruno
+         - discord
+         - font-jetbrains-mono
          - font-jetbrains-mono-nerd-font
          - ghostty
          - raycast
+         - spotify
          - zed
          - zen
 
@@ -31,6 +35,8 @@ packages:
        - easyeffects
        - fd
        - ghostty
+       - spotify-launcher
+       - ttf-jetbrains-mono
        - ttf-jetbrains-mono-nerd
        - zed
        - zen-browser-bin
