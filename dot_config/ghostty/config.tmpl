@@ -1,5 +1,5 @@
 font-family = "JetBrains Mono Nerd Font"
-font-size = 12
+font-size = {{ ternary 16 12 (eq .profile "macos") }}
 
 background-opacity = 0.79
 background-blur = 23
