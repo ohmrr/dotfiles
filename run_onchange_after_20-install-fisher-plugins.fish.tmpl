@@ -1,0 +1,31 @@
+#!/usr/bin/env fish
+
+set -l plugin_file "$HOME/.config/fish/fish_plugins"
+
+if not test -f "$plugin_file"
+    echo "error: missing $plugin_file" >&2
+    exit 1
+end
+
+if not functions -q fisher
+    if not type -q curl
+        echo "error: curl is required to install Fisher" >&2
+        exit 1
+    end
+
+    echo "==> Installing Fisher"
+
+    curl --silent --show-error --fail --location \
+        https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish \
+        | source
+
+    if not functions -q fisher
+        echo "error: Fisher bootstrap failed" >&2
+        exit 1
+    end
+
+    fisher install jorgebucaran/fisher
+end
+
+echo "==> Synchronizing Fisher plugins"
+fisher update

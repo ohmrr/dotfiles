@@ -8,6 +8,10 @@
       "left": 2,
       "right": 2,
       "bottom": 0
+    },
+    "color": {
+      "1": "#63d3de",
+      "2": "#63cbcf"
     }
   },
   "modules": [
@@ -32,5 +36,18 @@
       "type": "colors",
       "symbol": "block"
     }
-  ]
+  ],
+  "display": {
+    "color": {
+      "keys": "#81d3de",
+      "title": "#b1cbcf"
+    },
+    "percent": {
+      "color": {
+        "green": "#b9c6ea",
+        "yellow": "#81d3de",
+        "red": "#ffb4ab"
+      }
+    }
+  }
 }

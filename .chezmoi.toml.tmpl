@@ -1,6 +1,25 @@
+{{- $profiles := list
+    "macos"
+    "cachyos"
+    "ubuntu-wsl"
+    "ubuntu-server"
+-}}
+{{- $profile := promptChoiceOnce . "profile" "Machine profile" $profiles -}}
+
 {{- $name := promptStringOnce . "git.name" "Git name" -}}
 {{- $email := promptStringOnce . "git.email" "Git email" -}}
 {{- $signingKey := promptStringOnce . "git.signingKey" "Git SSH signing key" -}}
+
+[data]
+profile = {{ $profile | quote }}
+gui = {{ or
+    (eq $profile "macos")
+    (eq $profile "cachyos")
+}}
+bitwardenSSHAgent = {{ or
+    (eq $profile "macos")
+    (eq $profile "cachyos")
+}}
 
 [data.git]
 name = {{ $name | quote }}

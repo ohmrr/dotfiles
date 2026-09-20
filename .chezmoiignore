@@ -1,0 +1,5 @@
+{{ if not .gui }}
+.config/ghostty/**
+{{ end }}
+
+README.md

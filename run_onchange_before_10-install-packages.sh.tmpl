@@ -1,11 +1,169 @@
+{{- $common := .packages.common -}}
+{{- $profilePackages := index .packages.profiles .profile -}}
 #!/bin/sh
+
 set -eu
 
-{{ if eq .chezmoi.os "darwin" -}}
-brew install{{ range .packages.common }} {{ . }}{{ end }}{{ range .packages.darwin }} {{ . }}{{ end }}
+log() {
+    printf '\n==> %s\n' "$*"
+}
 
-{{ else if eq .chezmoi.os "linux" -}}
-{{ if or (eq .chezmoi.osRelease.id "arch") (eq .chezmoi.osRelease.id "cachyos") -}}
-sudo pacman -S --needed{{ range .packages.common }} {{ . }}{{ end }}{{ range .packages.arch }} {{ . }}{{ end }}
+die() {
+    printf 'error: %s\n' "$*" >&2
+    exit 1
+}
+
+require_command() {
+    command -v "$1" >/dev/null 2>&1 ||
+        die "'$1' is required for the {{ .profile }} profile"
+}
+
+as_root() {
+    if [ "$(id -u)" -eq 0 ]; then
+        "$@"
+    else
+        require_command sudo
+        sudo "$@"
+    fi
+}
+
+{{ if eq .profile "macos" -}}
+
+[ "$(uname -s)" = "Darwin" ] ||
+    die "The macos profile requires macOS"
+
+require_command brew
+
+log "Updating Homebrew"
+brew update
+
+log "Installing Homebrew formulae"
+brew install{{ range $common }} {{ . | quote }}{{ end }}{{ range $profilePackages.brew.formulae }} {{ . | quote }}{{ end }}
+
+{{ if gt (len $profilePackages.brew.cask) 0 -}}
+log "Installing Homebrew casks"
+brew install --cask{{ range $profilePackages.brew.cask }} {{ . | quote }}{{ end }}
 {{ end -}}
+
+{{ else if eq .profile "cachyos" -}}
+
+[ "$(uname -s)" = "Linux" ] ||
+    die "The cachyos profile requires Linux"
+
+[ -r /etc/os-release ] ||
+    die "/etc/os-release was not found"
+
+# shellcheck disable=SC1091
+. /etc/os-release
+
+case "${ID:-} ${ID_LIKE:-}" in
+    *cachyos*|*arch*)
+        ;;
+    *)
+        die "The cachyos profile requires CachyOS or Arch Linux"
+        ;;
+esac
+
+require_command pacman
+
+log "Updating CachyOS and installing repository packages"
+as_root pacman -Syu --needed --noconfirm{{ range $common }} {{ . | quote }}{{ end }}{{ range $profilePackages.pacman }} {{ . | quote }}{{ end }}
+
+{{ if gt (len $profilePackages.aur) 0 -}}
+[ "$(id -u)" -ne 0 ] ||
+    die "AUR packages must not be built as root"
+
+require_command paru
+
+log "Installing AUR packages"
+paru -S --needed --noconfirm{{ range $profilePackages.aur }} {{ . | quote }}{{ end }}
 {{ end -}}
+
+{{ else if or (eq .profile "ubuntu-wsl") (eq .profile "ubuntu-server") -}}
+
+[ "$(uname -s)" = "Linux" ] ||
+    die "The {{ .profile }} profile requires Linux"
+
+[ -r /etc/os-release ] ||
+    die "/etc/os-release was not found"
+
+# shellcheck disable=SC1091
+. /etc/os-release
+
+[ "${ID:-}" = "ubuntu" ] ||
+    die "The {{ .profile }} profile requires Ubuntu"
+
+{{ if eq .profile "ubuntu-wsl" -}}
+grep -qi microsoft /proc/sys/kernel/osrelease 2>/dev/null ||
+    die "The ubuntu-wsl profile requires WSL"
+{{ else -}}
+if grep -qi microsoft /proc/sys/kernel/osrelease 2>/dev/null; then
+    die "WSL detected; use the ubuntu-wsl profile"
+fi
+{{ end -}}
+
+require_command apt-get
+
+log "Updating APT metadata"
+as_root apt-get update
+
+log "Installing APT packages"
+as_root apt-get install --yes{{ range $common }} {{ . | quote }}{{ end }}{{ range $profilePackages.apt }} {{ . | quote }}{{ end }}
+
+{{ else -}}
+
+die "Unsupported profile: {{ .profile }}"
+
+{{ end -}}
+
+log "Package installation complete"
+
+printf '\nPackages ensured by chezmoi:\n'
+
+{{ if eq .profile "macos" -}}
+
+printf '\n  Homebrew formulae:\n'
+{{ range $common -}}
+printf '    - %s\n' {{ . | quote }}
+{{ end -}}
+{{ range $profilePackages.brew.formulae -}}
+printf '    - %s\n' {{ . | quote }}
+{{ end }}
+
+{{ if gt (len $profilePackages.brew.cask) 0 -}}
+printf '\n  Homebrew casks:\n'
+{{ range $profilePackages.brew.cask -}}
+printf '    - %s\n' {{ . | quote }}
+{{ end }}
+{{ end -}}
+
+{{ else if eq .profile "cachyos" -}}
+
+printf '\n  Pacman packages:\n'
+{{ range $common -}}
+printf '    - %s\n' {{ . | quote }}
+{{ end -}}
+{{ range $profilePackages.pacman -}}
+printf '    - %s\n' {{ . | quote }}
+{{ end }}
+
+{{ if gt (len $profilePackages.aur) 0 -}}
+printf '\n  AUR packages:\n'
+{{ range $profilePackages.aur -}}
+printf '    - %s\n' {{ . | quote }}
+{{ end }}
+{{ end -}}
+
+{{ else if or (eq .profile "ubuntu-wsl") (eq .profile "ubuntu-server") -}}
+
+printf '\n  APT packages:\n'
+{{ range $common -}}
+printf '    - %s\n' {{ . | quote }}
+{{ end -}}
+{{ range $profilePackages.apt -}}
+printf '    - %s\n' {{ . | quote }}
+{{ end }}
+
+{{ end -}}
+
+printf '\n'

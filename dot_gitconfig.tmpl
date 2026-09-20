@@ -1,26 +1,25 @@
 [user]
     name = {{ .git.name | quote }}
     email = {{ .git.email | quote }}
-    signingKey = {{ .git.signingKey | quote }}
     useConfigOnly = true
+{{- if ne .git.signingKey "" }}
+    signingKey = {{ .git.signingKey | quote }}
+{{- end }}
 
 [init]
     defaultBranch = main
-
-[gpg]
-    format = ssh
-{{ if eq .chezmoi.os "darwin" }}
-[gpg "ssh"]
-    program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
-{{ else if eq .chezmoi.os "linux" }}
-[gpg "ssh"]
-    program = "/opt/1Password/op-ssh-sign"
-{{ end }}
-[commit]
-    gpgSign = true
 
 [push]
     autoSetupRemote = true
 
 [fetch]
     prune = true
+
+{{- if ne .git.signingKey "" }}
+
+[gpg]
+    format = ssh
+
+[commit]
+    gpgSign = true
+{{- end }}
