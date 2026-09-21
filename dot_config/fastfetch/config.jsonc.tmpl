@@ -2,11 +2,11 @@
   "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/master/doc/json_schema.json",
   "logo": {
     "type": "auto",
-    "source": "arch",
+    "source": "{{ ternary `arch` `auto` (eq .profile `cachyos`) }}",
     "padding": {
-      "top": 2,
-      "left": 2,
-      "right": 2,
+      "top": 0,
+      "left": 0,
+      "right": 0,
       "bottom": 0
     },
     "color": {
