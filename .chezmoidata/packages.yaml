@@ -5,6 +5,7 @@ packages:
     - eza
     - fastfetch
     - fish
+    - fzf
     - neovim
     - ripgrep
     - starship
@@ -36,6 +37,7 @@ packages:
        - fd
        - ghostty
        - spotify-launcher
+       - tailscale
        - ttf-jetbrains-mono
        - ttf-jetbrains-mono-nerd
        - zed
